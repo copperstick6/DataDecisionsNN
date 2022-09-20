@@ -1,0 +1,21 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900);
+
+body {
+  margin-top: 150px;
+  font-family: 'Source Sans Pro', sans-serif;
+  background: rgb(42,82,190, .8);
+  text-align: center;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+@viewport {
+  width: device-width ;
+  zoom: 1.0 ;
+}
+
+
+p {
+  margin: 0;
+  font-size: 2rem;
+}

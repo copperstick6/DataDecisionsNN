@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/frontend.css') }}">
+</head>
+<script type="text/javascript">
+
+function getDataObject() {
+	var data = new Array();
+	data[1] = document.getElementById("hold").value;
+	data[0] = document.getElementById("cov").value;
+	data[2] = document.getElementById("qual").value;
+	data[3] = document.getElementById("peer").value;
+	data[4] = document.getElementById("global").value;
+	data[5] = document.getElementById("weight").value;
+	data[6] = document.getElementById("impact").value;
+	data[7] = document.getElementById("crit").value;
+	var returnedObj = new Array();
+	returnedObj[0] = data;
+	return returnedObj;
+}
+
+function handleSubmission(event) {
+	event.preventDefault();
+	console.log("Submitted!");
+
+	var data = new FormData();
+	data.append("json", JSON.stringify(getDataObject()));
+
+	var xhr = new XMLHttpRequest();
+	xhr.addEventListener("readystatechange", function () {
+	  if (this.readyState === 4) {
+		var result = "<h3>Result: " + this.responseText + "</h3>";
+    	document.getElementById("results").innerHTML = result;
+	  }
+	});
+	xhr.open("POST", "http://127.0.0.1:80/api");
+	xhr.send(data);
+	return false;
+}
+
+window.onload = function() {
+	var form = document.getElementById("submissions");
+	form.addEventListener('submit', handleSubmission);
+};
+</script>
+
+<body>
+
+<h1><center>Welome to Team 308's Data And Decisions Classifier!</center></h1>
+
+
+<h2>Input all fields below</h2>
+<h2>Empty inputs are assumed to be 0</h2>
+<h2>Press Submit to grab ratings prediction!</h2>
+
+<div id="results">
+	<form id="submissions" onSubmit="handleSubmission()">
+	<div class="form-row">
+	<div class="col">
+	<h3>Holdings Count</h3>
+	<input type="text" id="hold" name="hold"><br>
+	</div>
+	<div class="col">
+	<h3>Coverage</h3>
+	<input type="text" id="cov" name="cov">
+	</div>
+	<div class="col">
+	<h3>Quality Score</h3>
+	<input type="text" id="qual" name="qual">
+	</div>
+	<div class="col">
+	<h3>Quality Score Peer PCTL</h3>
+	<input type="text" id="peer" name="peer">
+	</div>
+	</div>
+	<br />
+	<div class="form-row">
+	<div class="col">
+	<h3>Quality Score PCTL Global</h3>
+	<input type="text" id="global" name="global"><br>
+	</div>
+	<div class="col">
+	<h3>Weighted Average Carbon</h3>
+	<input type="text" id="weight" name="weight">
+	</div>
+	<div class="col">
+	<h3>Sustainable Impact PCT</h3>
+	<input type="text" id="impact" name="impact">
+	</div>
+	<div class="col">
+	<h3>Exclusion Criteria PCT</h3>
+	<input type="text" id="crit" name="crit">
+	</div>
+	</div>
+	<br />
+	<br />
+	<input type="submit" value="Submit">
+	</div>
+	</form>
+
+</div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</html>
