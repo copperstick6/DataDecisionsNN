@@ -3,10 +3,11 @@
 body {
   margin-top: 150px;
   font-family: 'Source Sans Pro', sans-serif;
-  background: rgb(42,82,190, .8);
+  background: rgb(42,82,190, .6);
   text-align: center;
   margin-left: 100px;
   margin-right: 100px;
+  margin-bottom: 150px;
 }
 
 @viewport {
